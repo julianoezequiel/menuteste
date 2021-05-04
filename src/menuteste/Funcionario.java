@@ -10,7 +10,7 @@ public class Funcionario {
 	public String getNome() {
 		return nome;
 	}
-
+//testes
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
