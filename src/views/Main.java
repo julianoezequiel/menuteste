@@ -11,6 +11,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
+		CadastrarFuncionario cadastrarFuncionario = new CadastrarFuncionario();
+		CadastrarMarcacoes cadastrarMarcacoes = new CadastrarMarcacoes();
 		
 		int op;
 		
@@ -22,7 +24,7 @@ public class Main {
 			
 			switch (op) {
 			case 1:
-				CadastrarFuncionario.renderizar();
+				cadastrarFuncionario.renderizar();
 				break;
 				
 			case 2:
@@ -33,7 +35,7 @@ public class Main {
 				
 			case 3:
 				
-				CadastrarMarcacoes.renderizar();
+				cadastrarMarcacoes.renderizar();
 								
 				break;
 				

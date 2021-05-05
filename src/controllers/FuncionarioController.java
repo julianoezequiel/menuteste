@@ -1,20 +1,26 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import models.Funcionario;
 
 public class FuncionarioController {
 
-	private static ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-	static Scanner sc = new Scanner(System.in);
-	
-	public static ArrayList<Funcionario> listar() {
+	private List<Funcionario> funcionarios;
+	private Scanner sc;
+
+	public FuncionarioController() {
+		this.funcionarios = new ArrayList<>();
+		this.sc = new Scanner(System.in);
+	}
+
+	public List<Funcionario> listar() {
 		return funcionarios;
 	}
-	
-	public static boolean cadastrar(int pis, Funcionario funcionario) {
+
+	public boolean cadastrar(String pis, Funcionario funcionario) {
 
 		if (buscaPis(pis) == null) {
 			funcionarios.add(funcionario);
@@ -24,8 +30,8 @@ public class FuncionarioController {
 		}
 
 	}
-	
-	public static Funcionario buscaPis(int pis) {
+
+	public Funcionario buscaPis(String pis) {
 
 		for (Funcionario funcionarioCadastrado : funcionarios) {
 			if (funcionarioCadastrado.getPis() == pis) {

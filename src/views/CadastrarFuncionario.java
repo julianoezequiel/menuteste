@@ -13,8 +13,8 @@ public class CadastrarFuncionario {
 	private static Scanner sc = new Scanner(System.in);
 	private static Funcionario funcionario;
 	
-	public static void renderizar(){
-		System.out.println("\n".repeat(20));
+	public void renderizar(){
+		System.out.println("\n");
 		funcionario = new Funcionario();
 		System.out.println("\n-- CADASTRAR FUNCIONÁRIO --\n");
 		System.out.println("\nEntre com o nome do funcionário");
