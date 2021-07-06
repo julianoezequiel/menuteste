@@ -1,16 +1,18 @@
 package views;
 
-import controllers.FuncionarioController;
-import models.Funcionario;
 
-public class ListarFuncionario {
+import controllers.MarcacaoController;
+import models.Marcacao;
+
+public class ListarMarcacao 
+{
 	public static void renderizar()
 	{
 		System.out.println("\n".repeat(8));
 		System.out.println("#### LISTAR FUNCIONARIO ####");
-		for(Funcionario funcionarioCadastrado : FuncionarioController.listar()) 
+		for(Marcacao marcacaoCadastrada : MarcacaoController.listar()) 
 		{
-			System.out.println(funcionarioCadastrado);
+			System.out.println(marcacaoCadastrada);
 			System.out.println("--------------------------------------------------------------------");
 		}
 	}

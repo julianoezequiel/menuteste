@@ -1,45 +1,65 @@
 package views;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import controllers.EnderecoController;
 import controllers.FuncionarioController;
+import models.Endereco;
 import models.Funcionario;
+import models.ListaEndereco;
+import utils.Console;
 
-public class CadastrarFuncionario {
-	
+public class CadastrarFuncionario 
+{
 	private static Scanner sc = new Scanner(System.in);
 	private static Funcionario funcionario;
-	
-	public void renderizar(){
-		System.out.println("\n");
+	private static Endereco endereco;
+	private static ListaEndereco lista;
+	private static ArrayList<ListaEndereco> listas;
+	private static String opcao, apelido;
+	public static void renderizar() 
+	{
+		{
 		funcionario = new Funcionario();
-		System.out.println("\n-- CADASTRAR FUNCIONÁRIO --\n");
-		System.out.println("\nEntre com o nome do funcionário");
-		funcionario.setNome(sc.next());
-		System.out.println("\nDigite o PIS do funcionário");
-		funcionario.setPis(sc.nextInt());
-		System.out.println("\nDigite a data de admissão do funcionário");
-		
-		String dataAdm = sc.next(); 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = null;
-		try {
-			date = formatter.parse(dataAdm);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		funcionario.setDataAdm(date);
-		
-		if(FuncionarioController.cadastrar(funcionario.getPis(), funcionario)) {
-			System.out.println("Funcionário cadastrado com sucesso");
+		listas = new ArrayList<ListaEndereco>();
+		System.out.println("\n".repeat(8));
+		System.out.println("#### CADASTRAR FUNCIONARIO ####");
+		funcionario.setNome(Console.primMaius("Digite o nome do funcionario:"));
+		funcionario.setPis(Console.primMaius("Digite o PIS do funcionario:"));
+		funcionario.setCargo(Console.primMaius("Digite o cargo do funcionario:"));
+		funcionario.setDataAdm(Console.transData("Digite a data de admição do funcionario:"));
+		funcionario.setValorHora(Console.leDouble("Digite o valor da hora do funcionario:"));
+		do
+		{
+			endereco = new Endereco();
+			lista = new ListaEndereco();
+			System.out.println("Informe o apelido do endereço:");
+			apelido = sc.next();	
+			endereco = EnderecoController.buscarPorApelido(apelido);
+			if(endereco != null)
+			{
+				lista.setEnderecos(endereco);
+				lista.setApelidoEndereco(endereco.getApelidoEndereco());
+				
+				listas.add(lista);
+				
+			}else 
+			{
+				System.out.println("Este endereco nao existe");
+			}
+			System.out.println("\n Deseja adicionar mais endereços?");
+			opcao = sc.next();
+		}while(opcao.equals("S"));
+		funcionario.setEndereco(listas);
+		if(FuncionarioController.cadastrar(funcionario)) {
+			System.out.println("\n Funcionario Cadastado com sucesso!");
 		}else {
-			System.out.println("Funcionário já existe");
+			System.out.println("Não foi possível cadastrar o funcionário");
 		}
-		System.out.println("--------------------------------------------------------------------");
+		
+		
 	}
-	
+	}
+
 }
